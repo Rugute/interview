@@ -1,0 +1,53 @@
+var addressList = {
+"Kericho":
+        {
+            "Kipkelion East":
+                [
+                    {"ward":"Londiani","id":"Londiani"},
+                    {"ward":"Kedowa/Kimugul","id":"Kedowa/Kimugul"},
+                    {"ward":"Chepseon","id":"Chepseon"},
+                    {"ward":"Tendeno/Sorget","id":"Tendeno/Sorget"}
+                ],
+            "Kipkelion West":
+                [
+                    {"ward":"Kunyak","id":"Kunyak"},
+                    {"ward":"Kamasian","id":"Kamasian"},
+                    {"ward":"Kipkelion","id":"Kipkelion"},
+                    {"ward":"Chilchila","id":"Chilchila"}
+                ],
+            "Ainamoi":
+                [
+                    {"ward":"Kapsoit","id":"Kapsoit"},
+                    {"ward":"Ainamoi","id":"Ainamoi"},
+                    {"ward":"Kapkugerwet","id":"Kapkugerwet"},
+                    {"ward":"Kipchebor","id":"Kipchebor"},
+                    {"ward":"Kipchimchim","id":"Kipchimchim"},
+                    {"ward":"Kapsaos","id":"Kapsaos"}
+                ],
+            "Bureti":
+                [
+                    {"ward":"Kisiara","id":"Kisiara"},
+                    {"ward":"Tebesonik","id":"Tebesonik"},
+                    {"ward":"Cheboin","id":"Cheboin"},
+                    {"ward":"Chemosot","id":"Chemosot"},
+                    {"ward":"Litein","id":"Litein"},
+                    {"ward":"Cheplanget","id":"Cheplanget"},
+                    {"ward":"Kapkatet","id":"Kapkatet"}
+                ],
+            "Belgut":
+                [
+                    {"ward":"Waldai","id":"Waldai"},
+                    {"ward":"Kabianga","id":"Kabianga"},
+                    {"ward":"Cheptororiet/Seretut","id":"Cheptororiet/Seretu"},
+                    {"ward":"Chaik","id":"Chaik"},
+                    {"ward":"Kapsuser","id":"Kapsuser"}
+                ],
+            "Sigowet/Soin":
+                [
+                    {"ward":"Sigowet","id":"Sigowet"},
+                    {"ward":"Kaplelartet","id":"Kaplelartet"},
+                    {"ward":"Soliat","id":"Soliat"},
+                    {"ward":"Soin","id":"Soin"}
+                ]
+        }
+}

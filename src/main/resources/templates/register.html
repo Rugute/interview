@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <script type="text/javascript" th:src="@{/js/scripts/AddressList.js}"></script>
+    <script type="text/javascript" th:src="@{/jQuery/jquery-3.6.0.min.js}"></script>
+</head>
+<body>
+
+<table id="tbldemographics">
+    <tr>
+        <td class="ke-field-label" style="width: 265px">County</td>
+        <td class="ke-field-label" style="width: 260px">Sub-County</td>
+        <td class="ke-field-label" style="width: 260px">Ward</td>
+    </tr>
+    <tr>
+        <td style="width: 265px">
+            <select id="county" name="county">
+                <option value="">-- Select -- </option>
+                <option  value="Nyandarua">Nyandarua</option>
+                <option  value="Embu">Embu</option>
+                <option  value="Machakos">Machakos</option>
+                <option  value="Lamu">Lamu</option>
+                <option  value="Meru">Meru</option>
+                <option  value="Nairobi">Nairobi</option>
+                <option  value="Nyamira">Nyamira</option>
+                <option  value="Bungoma">Bungoma</option>
+                <option  value="Tharaka Nithi">Tharaka Nithi</option>
+                <option  value="Marsabit">Marsabit</option>
+                <option  value="Taita Taveta">Taita Taveta</option>
+                <option  value="Kisumu">Kisumu</option>
+                <option  value="Garissa">Garissa</option>
+                <option  value="Uasin Gishu">Uasin Gishu</option>
+                <option  value="Bomet">Bomet</option>
+                <option  value="Kakamega">Kakamega</option>
+                <option  value="Wajir">Wajir</option>
+                <option  value="Trans Nzoia">Trans Nzoia</option>
+                <option  value="Turkana">Turkana</option>
+                <option  value="Nyeri">Nyeri</option>
+                <option  value="Kericho">Kericho</option>
+                <option  value="Tana River">Tana River</option>
+                <option  value="Muranga">Muranga</option>
+                <option  value="Isiolo">Isiolo</option>
+                <option  value="Laikipia">Laikipia</option>
+                <option  value="Migori">Migori</option>
+                <option  value="Samburu">Samburu</option>
+                <option  value="Kilifi">Kilifi</option>
+                <option  value="Siaya">Siaya</option>
+                <option  value="Elgeyo Marakwet">Elgeyo Marakwet</option>
+                <option  value="Kiambu">Kiambu</option>
+                <option  value="Nakuru">Nakuru</option>
+                <option  value="Kitui">Kitui</option>
+                <option  value="West Pokot">West Pokot</option>
+                <option  value="Vihiga">Vihiga</option>
+                <option  value="Kisii">Kisii</option>
+                <option  value="Mombasa">Mombasa</option>
+                <option  value="Homa Bay">Homa Bay</option>
+                <option  value="Makueni">Makueni</option>
+                <option  value="Mandera">Mandera</option>
+                <option  value="Nandi">Nandi</option>
+                <option  value="Kirinyaga">Kirinyaga</option>
+                <option  value="Kwale">Kwale</option>
+                <option  value="Kajiado">Kajiado</option>
+                <option  value="Baringo">Baringo</option>
+                <option  value="Busia">Busia</option>
+                <option  value="Narok">Narok</option>
+            </select>
+            </select>
+        </td>
+        <td style="width: 260px">
+            <select id="subCounty" name="subCounty">
+                <option></option>
+            </select>
+        </td>
+        <td style="width: 260px">
+            <select id="ward" name="ward">
+                <option></option>
+            </select>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+<script>
+    $( document ).ready(function() {
+    console.log( "ready!" );
+    alert("Iko sawa");
+    $('#county').empty();
+    $('#subCounty').empty();
+    $('#ward').empty();
+    $('#county').append($("<option></option>").attr("value", "").text(""));
+    for (scKey in addressList[]) {
+        $('#county').append(jQuery("<option></option>").attr("value", scKey).text(scKey));
+    }
+});
+</script>
+<script>
+$('#tbldemographics').on('change', '#county', function(){
+      updateSubcounty();
+});
+$('#tbldemographics').on('change', '#subCounty', function(){
+      updateWard();
+});
+
+function updateSubcounty() {
+    alert("Counties Functions");
+    $('#subCounty').empty();
+    $('#ward').empty();
+    var selectedCounty = $('#county').val();
+    var scKey;
+    $('#subCounty').append($("<option></option>").attr("value", "").text(""));
+    for (scKey in addressList[selectedCounty]) {
+        $('#subCounty').append(jQuery("<option></option>").attr("value", scKey).text(scKey));
+    }
+}
+function updateWard() {
+            $('#ward').empty();
+            var selectedCounty = jQuery('#county').val();
+            var selectedsubCounty = jQuery('#subCounty').val();
+            var scKey;
+            jQuery('#ward').append(jQuery("<option></option>").attr("value", "").text(""));
+            for (scKey in addressList[selectedCounty][selectedsubCounty]) {
+                $('#ward').append(jQuery("<option></option>").attr("value", addressList[selectedCounty][selectedsubCounty][scKey].ward).text(addressList[selectedCounty][selectedsubCounty][scKey].ward));
+            }
+            }
+</script>
+</html>
