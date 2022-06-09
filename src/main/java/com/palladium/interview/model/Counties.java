@@ -1,11 +1,14 @@
 package com.palladium.interview.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -28,6 +31,10 @@ public class Counties {
 
     @Column(name = "capital_city ")
     private String capital_city ;
+
+    @OneToMany(mappedBy="subCounties", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("subCounties")
+    private List<Counties> subCounties = new ArrayList<Counties>();
 
     public int getId() {
         return id;

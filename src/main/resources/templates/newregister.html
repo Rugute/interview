@@ -15,15 +15,6 @@
     <!-- Theme style -->
     <link rel="stylesheet" th:href="@{/themes/pm/dist/css/adminlte.min.css}">
 </head>
-<!--
-`body` tag options:
-
-  Apply one or more of the following classes to to the body tag
-  to get the desired effect
-
-  * sidebar-collapse
-  * sidebar-mini
--->
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
     <!-- Navbar -->
@@ -50,7 +41,7 @@
                     <div class="card-body">
 
 
-                        <form onsubmit="upload();return false">
+                        <form onsubmit="upload();return false" style="border:orange;">
                             <legend>Client Regitration</legend>
                             <div class="containers">
                                 <div class="item">
@@ -77,61 +68,14 @@
                                     <div class="form-group">
                                         <label for="cname">County</label> </br>
                                         <select id="county" name="county">
-                                            <option value="">-- Select -- </option>
-                                            <option  value="Nyandarua">Nyandarua</option>
-                                            <option  value="Embu">Embu</option>
-                                            <option  value="Machakos">Machakos</option>
-                                            <option  value="Lamu">Lamu</option>
-                                            <option  value="Meru">Meru</option>
-                                            <option  value="Nairobi">Nairobi</option>
-                                            <option  value="Nyamira">Nyamira</option>
-                                            <option  value="Bungoma">Bungoma</option>
-                                            <option  value="Tharaka Nithi">Tharaka Nithi</option>
-                                            <option  value="Marsabit">Marsabit</option>
-                                            <option  value="Taita Taveta">Taita Taveta</option>
-                                            <option  value="Kisumu">Kisumu</option>
-                                            <option  value="Garissa">Garissa</option>
-                                            <option  value="Uasin Gishu">Uasin Gishu</option>
-                                            <option  value="Bomet">Bomet</option>
-                                            <option  value="Kakamega">Kakamega</option>
-                                            <option  value="Wajir">Wajir</option>
-                                            <option  value="Trans Nzoia">Trans Nzoia</option>
-                                            <option  value="Turkana">Turkana</option>
-                                            <option  value="Nyeri">Nyeri</option>
-                                            <option  value="Kericho">Kericho</option>
-                                            <option  value="Tana River">Tana River</option>
-                                            <option  value="Muranga">Muranga</option>
-                                            <option  value="Isiolo">Isiolo</option>
-                                            <option  value="Laikipia">Laikipia</option>
-                                            <option  value="Migori">Migori</option>
-                                            <option  value="Samburu">Samburu</option>
-                                            <option  value="Kilifi">Kilifi</option>
-                                            <option  value="Siaya">Siaya</option>
-                                            <option  value="Elgeyo Marakwet">Elgeyo Marakwet</option>
-                                            <option  value="Kiambu">Kiambu</option>
-                                            <option  value="Nakuru">Nakuru</option>
-                                            <option  value="Kitui">Kitui</option>
-                                            <option  value="West Pokot">West Pokot</option>
-                                            <option  value="Vihiga">Vihiga</option>
-                                            <option  value="Kisii">Kisii</option>
-                                            <option  value="Mombasa">Mombasa</option>
-                                            <option  value="Homa Bay">Homa Bay</option>
-                                            <option  value="Makueni">Makueni</option>
-                                            <option  value="Mandera">Mandera</option>
-                                            <option  value="Nandi">Nandi</option>
-                                            <option  value="Kirinyaga">Kirinyaga</option>
-                                            <option  value="Kwale">Kwale</option>
-                                            <option  value="Kajiado">Kajiado</option>
-                                            <option  value="Baringo">Baringo</option>
-                                            <option  value="Busia">Busia</option>
-                                            <option  value="Narok">Narok</option>
+
                                         </select>
                                     </div>
                                 </div>
                                 <div class="item">
                                     <div class="form-group">
                                         <label for="cname">Sub County</label> </br>
-                                        <select id="subcounty" name="county">
+                                        <select id="subcounty" name="subcounty">
                                         </select>
 
                                     </div>
@@ -139,7 +83,7 @@
                                 <div class="item">
                                     <div class="form-group">
                                         <label for="cname">Ward</label> </br>
-                                        <select id="ward" name="county">
+                                        <select id="ward" name="ward">
                                         </select>
                                     </div>
                                 </div>
@@ -179,5 +123,79 @@
 <script th:src="@{/themes/pm/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <!-- AdminLTE -->
 <script th:src="@{/themes/pm/dist/js/adminlte.js}"></script>
+
+<script>
+$(document).ready(function () {
+  var ddlCounty = $('#county');
+        ddlCounty.append($("<option></option>").val('').html('Please Select County'));
+        $.ajax({
+            url: 'http://localhost:8080/api/v1/reg/counties',
+            type: 'GET',
+            dataType: 'json',
+            success: function (d) {
+                $.each(d, function (i, county) {
+                    ddlCounty.append($("<option></option>").val(county.code).html(county.name));
+                });
+            },
+            error: function () {
+                alert('Error!');
+            }
+        });
+
+    $("#county").change(function () {
+            var CountyId = parseInt($(this).val());
+            if (!isNaN(CountyId)) {
+                var ddlsubcounty = $('#subcounty');
+                ddlsubcounty.empty();
+                ddlsubcounty.append($("<option></option>").val('').html('Please wait ...'));
+                debugger;
+                $.ajax({
+                    url: 'http://localhost:8080/api/v1/reg/subcounties/'+CountyId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (d) {
+                        ddlsubcounty.empty(); // Clear the please wait
+                        ddlsubcounty.append($("<option></option>").val('').html('Select Sub County'));
+                        $.each(d, function (i, states) {
+                            ddlsubcounty.append($("<option></option>").val(states.code).html(states.name));
+                        });
+                    },
+                    error: function () {
+                        alert('Error!');
+                    }
+                });
+            }
+
+
+        });
+
+     //City Bind By satate id
+        $("#subcounty").change(function () {
+            var subcountyId = parseInt($(this).val());
+            if (!isNaN(subcountyId)) {
+                var ddlWards = $('#ward');
+                ddlWards.append($("<option></option>").val('').html('Please wait ...'));
+
+                debugger;
+                $.ajax({
+                    url: 'http://localhost:8080/api/v1/reg/wards/'+ subcountyId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (d) {
+                        ddlWards.empty(); // Clear the please wait
+                        ddlWards.append($("<option></option>").val('').html('Select Wards'));
+                        $.each(d, function (i, cities) {
+                            ddlWards.append($("<option></option>").val(cities.id).html(cities.name));
+                        });
+                    },
+                    error: function () {
+                        alert('Error!');
+                    }
+                });
+            }
+});
+});
+</script>
 </body>
+
 </html>

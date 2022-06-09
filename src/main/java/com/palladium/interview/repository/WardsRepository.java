@@ -9,6 +9,6 @@ import java.util.List;
 public interface WardsRepository extends JpaRepository<Wards, Long> {
     List<Wards> findAll();
     Wards findById(int qid);
-    //List<Wards> findBySubcounty_code(int id);
+    List<Wards> findBySubcountyid(int id);
 
 }

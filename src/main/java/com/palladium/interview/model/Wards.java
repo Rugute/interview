@@ -22,8 +22,8 @@ public class Wards {
     @Column(name = "code ")
     private int code ;
 
-    @Column(name = "subcounty_code")
-    private int subcounty_code;
+    @Column(name = "subcountyid")
+    private int subcountyid;
 
     @Column(name = "name")
     private String name;
@@ -44,12 +44,12 @@ public class Wards {
         this.code = code;
     }
 
-    public int getSubcounty_code() {
-        return subcounty_code;
+    public int getSubcountyid() {
+        return subcountyid;
     }
 
-    public void setSubcounty_code(int subcounty_code) {
-        this.subcounty_code = subcounty_code;
+    public void setSubcountyid(int subcountyid) {
+        this.subcountyid = subcountyid;
     }
 
     public String getName() {
@@ -59,4 +59,5 @@ public class Wards {
     public void setName(String name) {
         this.name = name;
     }
+
 }

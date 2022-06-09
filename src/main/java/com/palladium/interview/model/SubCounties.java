@@ -1,5 +1,6 @@
 package com.palladium.interview.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +23,8 @@ public class SubCounties {
     @Column(name = "code ")
     private int code ;
 
-    @Column(name = "county_code")
-    private int county_code;
+    @Column(name = "countyid")
+    private int countyid;
 
     @Column(name = "name")
     private String name;
@@ -44,12 +45,12 @@ public class SubCounties {
         this.code = code;
     }
 
-    public int getCounty_code() {
-        return county_code;
+    public int getCountyid() {
+        return countyid;
     }
 
-    public void setCounty_code(int county_code) {
-        this.county_code = county_code;
+    public void setCountyid(int countyid) {
+        this.countyid = countyid;
     }
 
     public String getName() {
