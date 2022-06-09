@@ -1,4 +1,4 @@
-# interview
+# README
 Make adjustment to the application.properties to read your current MySQL configuration
 
 spring.datasource.url=jdbc:mysql://localhost/palladium?createDatabaseIfNotExist=true
