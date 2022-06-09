@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Middleware | Reporting </title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" th:href="@{/themes/pm/plugins/fontawesome-free/css/all.min.css}">
+    <!-- IonIcons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/themes/pm/dist/css/adminlte.min.css}">
+</head>
+<!--
+`body` tag options:
+
+  Apply one or more of the following classes to to the body tag
+  to get the desired effect
+
+  * sidebar-collapse
+  * sidebar-mini
+-->
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- Navbar -->
+    <div th:insert="~{header}"></div>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <div th:insert="~{nav}"></div>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+        <!-- Main content -->
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="card-body">
+
+
+                        <form onsubmit="upload();return false">
+                            <legend>Client Regitration</legend>
+                            <div class="containers">
+                                <div class="item">
+                                    <div class="form-group">
+                                        <label for="cname">Client Name</label> </br>
+                                        <input type="text" id="cname" name="cname" required="required" />
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="form-group">
+                                        <label for="cname">Date of Birth</label> </br>
+                                        <input type="date" id="dob" name="dob" required="required" />
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="form-group">
+                                        <label for="cname">Sex</label> </br>
+                                        <input type="text" id="sex" name="sex" required="required" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="containers">
+                                <div class="item">
+                                    <div class="form-group">
+                                        <label for="cname">County</label> </br>
+                                        <select id="county" name="county">
+                                            <option value="">-- Select -- </option>
+                                            <option  value="Nyandarua">Nyandarua</option>
+                                            <option  value="Embu">Embu</option>
+                                            <option  value="Machakos">Machakos</option>
+                                            <option  value="Lamu">Lamu</option>
+                                            <option  value="Meru">Meru</option>
+                                            <option  value="Nairobi">Nairobi</option>
+                                            <option  value="Nyamira">Nyamira</option>
+                                            <option  value="Bungoma">Bungoma</option>
+                                            <option  value="Tharaka Nithi">Tharaka Nithi</option>
+                                            <option  value="Marsabit">Marsabit</option>
+                                            <option  value="Taita Taveta">Taita Taveta</option>
+                                            <option  value="Kisumu">Kisumu</option>
+                                            <option  value="Garissa">Garissa</option>
+                                            <option  value="Uasin Gishu">Uasin Gishu</option>
+                                            <option  value="Bomet">Bomet</option>
+                                            <option  value="Kakamega">Kakamega</option>
+                                            <option  value="Wajir">Wajir</option>
+                                            <option  value="Trans Nzoia">Trans Nzoia</option>
+                                            <option  value="Turkana">Turkana</option>
+                                            <option  value="Nyeri">Nyeri</option>
+                                            <option  value="Kericho">Kericho</option>
+                                            <option  value="Tana River">Tana River</option>
+                                            <option  value="Muranga">Muranga</option>
+                                            <option  value="Isiolo">Isiolo</option>
+                                            <option  value="Laikipia">Laikipia</option>
+                                            <option  value="Migori">Migori</option>
+                                            <option  value="Samburu">Samburu</option>
+                                            <option  value="Kilifi">Kilifi</option>
+                                            <option  value="Siaya">Siaya</option>
+                                            <option  value="Elgeyo Marakwet">Elgeyo Marakwet</option>
+                                            <option  value="Kiambu">Kiambu</option>
+                                            <option  value="Nakuru">Nakuru</option>
+                                            <option  value="Kitui">Kitui</option>
+                                            <option  value="West Pokot">West Pokot</option>
+                                            <option  value="Vihiga">Vihiga</option>
+                                            <option  value="Kisii">Kisii</option>
+                                            <option  value="Mombasa">Mombasa</option>
+                                            <option  value="Homa Bay">Homa Bay</option>
+                                            <option  value="Makueni">Makueni</option>
+                                            <option  value="Mandera">Mandera</option>
+                                            <option  value="Nandi">Nandi</option>
+                                            <option  value="Kirinyaga">Kirinyaga</option>
+                                            <option  value="Kwale">Kwale</option>
+                                            <option  value="Kajiado">Kajiado</option>
+                                            <option  value="Baringo">Baringo</option>
+                                            <option  value="Busia">Busia</option>
+                                            <option  value="Narok">Narok</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="form-group">
+                                        <label for="cname">Sub County</label> </br>
+                                        <select id="subcounty" name="county">
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="form-group">
+                                        <label for="cname">Ward</label> </br>
+                                        <select id="ward" name="county">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div align="center">
+                                <button  class="btn-success" id="saveprogram" >Submit</button>
+
+                            </div>
+                        </form>
+                </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <div th:insert="~{footer}"></div>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script th:src="@{/themes/pm/plugins/jquery/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/themes/pm/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE -->
+<script th:src="@{/themes/pm/dist/js/adminlte.js}"></script>
+</body>
+</html>

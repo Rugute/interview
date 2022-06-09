@@ -21,4 +21,12 @@ public class RegController {
 
     }
 
+    @RequestMapping(value = "/client", method = RequestMethod.GET)
+    public ModelAndView newclient() {
+        Date nowDate = new Date();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("newregister");
+        return modelAndView;
+    }
+
 }

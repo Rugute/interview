@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Middleware | Databases </title>
+    <title>Middleware | ETL </title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -56,82 +56,49 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Databases</h3>
-
-                                <input type="button" value="Upload Database" id="cmdAdduser" name="cmdAdduser" class="external-event bg-success" style="float: right;" data-toggle="modal" data-target="#myModal">
-
-                                <input type="hidden" id="txtsmg" name="txtsmg" th:value="${smg}">
-
+                                <h3 class="card-title">Central ETL</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
+                               <div align="center">
+                                <input type="button" value="Refresh Data" id="cmdRefresh" name="cmdRefresh" class="external-event bg-success" style="float: centre;"/>
+                                <input type="button" value="Create ETL" id="cmdRecreate" name="cmdRecreate" class="external-event bg-warning" style="float: centre;"/>
+                               </div>
+                               </br>
                                 <font size="2" face="Courier New" >
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                    <tr>
-                                    <tr>
-                                        <th>MFLCode</th>
-                                        <th>Facility Name</th>
-                                       <!-- <th>Database Name</th>-->
-                                       <!-- <th>Reuploaded</th>-->
-                                        <th>Status</th>
-                                        <th>Date Uploaded</th>
-                                        <th>Last Encounter Date</th>
-                                        <th>Size</th>
-                                        <th>Restore/Drop</th>
-                                        <th>Download</th>
+                                    <table id="example2" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                        <tr>
+                                            <th>Procedure</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Completion Status</th>
+                                        </tr>
 
-                                    </tr>
-
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="ul : ${dbs}">
-                                        <td th:text="${#numbers.formatInteger(ul.mflcode,0)}"></td>
-                                        <td th:text="${ul.name}"></td>
-                                      <!--  <td th:text="${ul.dbname}"></td>-->
-                                      <!--  <td th:text="${ul.reuploaded}"></td>-->
-                                        <td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="ul : ${etl}">
+                                            <td th:text="${ul.sprocedure}"></td>
+                                            <td th:text="${ul.startdate}"></td>
+                                            <td th:text="${ul.enddate}"></td>
+                                            <td>
                                             <span th:if="${ul.status == 'Restored'}">
                                                        <span class="external-event bg-success" th:text="${ul.status}"></span>
-
                                             </span>
-                                            <span th:unless="${ul.status == 'Restored'}">
-                                                        <span class="external-event bg-warning" th:text="${ul.status}"></span>
-                                            </span>
-
-
-                                        </td>
-                                        <td th:text="${ul.created_on}"></td>
-                                        <td th:text="${ul.created_on}"></td>
-
-                                        <td th:text="${ul.dbsize}"></td>
-                                        <td>
-                                             <span th:if="${ul.status == 'Restored'}">
-                                                 <a th:href="@{'/databasemanager/drop/'+${ul.dbname}}"> <span class="external-event bg-danger">Drop</span></a>
-
-                                            </span>
-                                            <span th:unless="${ul.status == 'Restored'}">
-                                                        <a th:href="@{'/databasemanager/restore/'+${ul.dbname}}"><span class="external-event bg-warning">Restore</span></a>
+                                                    <span th:unless="${ul.status == 'Restored'}">
+                                                      <span class="external-event bg-warning" th:text="${ul.status}"></span>
                                             </span>
 
 
-                                        </td>
-                                        <td>
-                                            <a th:href="@{'/databasemanager/download/'+${ul.dbname}}"> <span class="external-event bg-info">Download</span></a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                            </td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </font>
                             </div>
-
-                            <div id="loading-div-background">
-                                <div id="loading-div" class="ui-corner-all">
-                                    <img style="height:80px;width:80px;margin:30px;" th:src="@{/themes/img/please_wait.gif}" alt="Loading.."/><br>PROCESSING. PLEASE WAIT...
-                                </div>
-                            </div>
-
                             <!-- Start of Mode -->
                             <div class="modal fade" id="myModal" >
                                 <div class="modal-dialog modal-dialog-centered">
@@ -140,7 +107,7 @@
                                         <!-- Modal Header -->
                                         <div class="modal-header">
                                             <h4 class="modal-title">Upload Database</h4>
-                                            <button type="button" id="cmdclose" class="close" data-dismiss="modal">&times;</button>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
 
                                         <!-- Modal body -->
@@ -162,19 +129,19 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="year">Year</label>
-                                                          <!--  <select  id="year" name="year" required="required" class="form-control col-md-10 col-xs-12" >
+                                                            <select  id="year" name="year" required="required" class="form-control col-md-10 col-xs-12" >
                                                                 <option th:value="''" th:text="Select"></option>
                                                                 <option th:each="i : ${years}" th:value="${i.year}" th:text="${i.year}"></option>
-                                                            </select>-->
+                                                            </select>
                                                         </div>
                                                     </div>
                                                     <div class="item">
                                                         <div class="form-group">
                                                             <label for="month">Month</label>
-                                                           <!-- <select  id="month" name="month" required="required" class="form-control col-md-10 col-xs-12" >
+                                                            <select  id="month" name="month" required="required" class="form-control col-md-10 col-xs-12" >
                                                                 <option th:value="''" th:text="Select"></option>
                                                                 <option th:each="i : ${months}" th:value="${i.shortname}" th:text="${i.monthname}"></option>
-                                                            </select>-->
+                                                            </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="filename">Choose Database</label> </br>
@@ -258,72 +225,7 @@
     });
   });
 </script>
-<script>
-    $(function() {
-    $('form').submit(function() {
 
-       document.getElementById('facility').style.display = 'none';
-       document.getElementById('year').style.display = 'none';
-       document.getElementById('month').style.display = 'none';
-       document.getElementById('cmdclose').click();
-       document.getElementById("sidenav").setAttribute("hidden", "hidden");
-       document.getElementById("navpanel").style.display = 'none';
-       $("#loading-div-background").show();
-                    var facility = document.getElementById("facility").value;
-                    var year = document.getElementById("year").value;
-                    var month = document.getElementById("month").value;
-                    //var file =  $('#filename')[0].files[0] ;// document.getElementById("filename")[0];
-                    // alert(file);
-                     var filename = new FormData($("#upload")[3]);
-                     var filen = new FormData($("#upload")[3]);
-                     var getUrl = window.location;
-                     var baseurls =  getUrl.origin + '/' +getUrl.pathname.split('/')[1]+'/databasemanager/uploadFile';
-                     // alert(baseurls);
-                     //alert(filename);
-                      console.log($('#filename')[0].files[0])
-                      var formData = new FormData();
-                      var files = $('#filename')[0].files[0];
-                      formData.append("file", files);
-                      formData.append("facility", facility);
-                      formData.append("year", year);
-                      formData.append("month",month);
-                        $.ajax({
-                                url: baseurls,
-                                type: 'POST',
-                                data: formData,
-                                enctype: 'multipart/form-data',
-                                contentType : false,
-                                cache : false,
-                                processData : false,
-                                success: function (result) {
-                                var x = result;
-                               // alert(x);
-                                   document.getElementById('facility').style.display = 'block';
-                                   document.getElementById('year').style.display = 'block';
-                                   document.getElementById('month').style.display = 'block';
-                                $(".txtnav").hide();
-                                 document.getElementById("sidenav").removeAttribute("hidden");
-                                 document.getElementById("navpanel").style.display = 'block';
-
-                                $("#loading-div-background").hide();
-                                 //console.log(result);
-                                   $.toast({ heading: 'Success',
-                                          text: 'Record Operation Successfully',
-                                          showHideTransition: 'slide',
-                                          icon: 'success',
-                                          position : 'top-right',
-                                          hideAfter : 7000,
-                                          stack : 5,
-                                          })
-                                        window.setTimeout(function(){location.reload()},7000)
-
-                                  }
-                        });
-
-        return false;
-    });
-});
-</script>
 <script th:src="@{/themes/jtoaster/jquery.toast.min.js}"></script>
 </body>
 </html>

@@ -85,7 +85,7 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="ul : ${dbs}">
-                                            <td th:text="${#numbers.formatInteger(ul.mflcode,0)}"></td>
+                                            <td th:text="${ul.mflcode}"></td>
                                             <td th:text="${ul.name}"></td>
                                              <td>
                                             <span th:if="${ul.status == 'Restored'}">
@@ -250,15 +250,39 @@ function upload(){
                      var filename = new FormData($("#upload")[3]);
                      var filen = new FormData($("#upload")[3]);
                      var getUrl = window.location;
-                     var baseurls =  getUrl.origin + '/' +getUrl.pathname.split('/')[1]+'/databasemanager/uploadFile';
-                     alert(baseurls);
-                    alert(filename);
-                     console.log($('#filename')[0].files[0])
+                     var baseurls =  getUrl.origin + '/' +getUrl.pathname.split('/')[1]+'/uploadFile';
+                      console.log($('#filename')[0].files[0])
                       var formData = new FormData();
                       var files = $('#filename')[0].files[0];
                       formData.append("file", files);
                       formData.append("facility", facility);
-                      
+                       $.ajax({
+                                url: baseurls,
+                                type: 'POST',
+                                data: formData,
+                                enctype: 'multipart/form-data',
+                                contentType : false,
+                                cache : false,
+                                processData : false,
+                                success: function (result) {
+                                  document.getElementById('facility').style.display = 'block';
+                                  $(".txtnav").hide();
+                                 document.getElementById("sidenav").removeAttribute("hidden");
+                                 document.getElementById("navpanel").style.display = 'block';
+                                $("#loading-div-background").hide();
+                                   $.toast({ heading: 'Success',
+                                          text: 'Record Operation Successfully',
+                                          showHideTransition: 'slide',
+                                          icon: 'success',
+                                          position : 'top-right',
+                                          hideAfter : 7000,
+                                          stack : 5,
+                                          })
+                                        window.setTimeout(function(){location.reload()},7000)
+
+                                  }
+
+                                });
 }
 
 </script>
