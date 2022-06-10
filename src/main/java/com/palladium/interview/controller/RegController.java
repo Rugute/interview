@@ -29,4 +29,12 @@ public class RegController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/api", method = RequestMethod.GET)
+    public ModelAndView systemapi() {
+        Date nowDate = new Date();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("apis");
+        return modelAndView;
+    }
+
 }

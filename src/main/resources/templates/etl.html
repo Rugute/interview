@@ -61,9 +61,9 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                <div align="center">
-                                <input type="button" value="Refresh Data" id="cmdRefresh" name="cmdRefresh" class="external-event bg-success" style="float: centre;"/>
-                                <input type="button" value="Create ETL" id="cmdRecreate" name="cmdRecreate" class="external-event bg-warning" style="float: centre;"/>
-                               </div>
+                                <input type="button" value="Refresh Data" id="cmdRefresh" onclick="refreshdata()" name="cmdRefresh" class="external-event bg-success" style="float: centre;"/>
+                             <!--   <input type="button" value="Create ETL" id="cmdRecreate" name="cmdRecreate" class="external-event bg-warning" style="float: centre;"/>
+                             -->  </div>
                                </br>
                                 <font size="2" face="Courier New" >
                                     <table id="example2" class="table table-bordered table-striped">
@@ -99,74 +99,7 @@
                                     </table>
                                 </font>
                             </div>
-                            <!-- Start of Mode -->
-                            <div class="modal fade" id="myModal" >
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
 
-                                        <!-- Modal Header -->
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Upload Database</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-
-                                        <!-- Modal body -->
-                                        <div class="modal-body">
-                                            <form name="upload" id="upload">
-                                                <div class="containers">
-                                                    <div class="item">
-                                                        <div class="form-group">
-                                                            <label for="facility">Facility</label>
-                                                            <datalist id="suggestions">
-                                                                <option th:each="i : ${falicities}" th:value="${#numbers.formatInteger(i.mflcode,0)}" th:text="${i.facilityname}"></option>
-
-                                                            </datalist>
-                                                            <input  id="facility" name="facility"  autoComplete="on" list="suggestions" required="required" class="form-control col-md-10 col-xs-12"/>
-                                                            <!--    <select  id="datasett" name="dataset" required="required" class="form-control col-md-10 col-xs-12" >
-                                                                    <option th:value="''" th:text="Select"></option>
-                                                                    <option th:each="i : ${dataset}" th:value="${i.displayid}" th:text="${i.displayname}"></option>
-                                                                </select>-->
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="year">Year</label>
-                                                            <select  id="year" name="year" required="required" class="form-control col-md-10 col-xs-12" >
-                                                                <option th:value="''" th:text="Select"></option>
-                                                                <option th:each="i : ${years}" th:value="${i.year}" th:text="${i.year}"></option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item">
-                                                        <div class="form-group">
-                                                            <label for="month">Month</label>
-                                                            <select  id="month" name="month" required="required" class="form-control col-md-10 col-xs-12" >
-                                                                <option th:value="''" th:text="Select"></option>
-                                                                <option th:each="i : ${months}" th:value="${i.shortname}" th:text="${i.monthname}"></option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="filename">Choose Database</label> </br>
-                                                            <input type="file" id="filename" name="filename" accept=".sql" enctype="multipart/form-data" required="required" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div align="center">
-
-                                                    <button class="btn-success" id="saveprogram">Submit</button>
-
-                                                </div>
-
-                                            </form>
-                                        </div>
-
-                                        <!-- Modal footer -->
-                                        <!-- <div class="modal-footer">
-                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                         </div> -->
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!--- end of Model -->
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
@@ -224,6 +157,11 @@
       "responsive": true,
     });
   });
+</script>
+<script>
+    function refreshdata(){
+    alert("here");
+    }
 </script>
 
 <script th:src="@{/themes/jtoaster/jquery.toast.min.js}"></script>

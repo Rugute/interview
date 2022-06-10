@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Map;
 
 public interface ETLRepository extends JpaRepository<ETL, Long> {
-    @Query(value = "CALL sp_get_patient_programs();", nativeQuery = true)
+    @Query(value = "CALL sp_mergeclients();", nativeQuery = true)
     Map<String, Object> testSp();
 
 }

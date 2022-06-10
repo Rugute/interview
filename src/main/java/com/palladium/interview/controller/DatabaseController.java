@@ -242,6 +242,42 @@ public class DatabaseController {
         return smg;//"Restored Successfully";
     }
 
+    @GetMapping("/drop/{fileName}")
+    // @ResponseBody
+    public ModelAndView dropdatabase(@PathVariable String fileName) throws IOException, InterruptedException {
+        String fpath = dbpath;
+        final String smg = "";
+        // String realPathtoUploads = dbpath + fileName;
+        String nfilename = fileName.substring(0, fileName.length() - 4);
+        System.out.println("Droping databases");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Connection connection = DriverManager.getConnection(dburl, username, password);
+                    System.out.println("New file name is " + fileName);
+                    String sql = "DROP DATABASE " + nfilename;
+                    Statement statement = connection.createStatement();
+                    statement.executeUpdate(sql);
+                    statement.close();
+                    DatabaseInfo databaseInfo = databaseinfoService.getByDbname(fileName);
+                    databaseinfoService.delete(databaseInfo);
+                    // smg = "Database created successfully";
+                } catch (SQLException e) {
+
+                    DatabaseInfo databaseInfo = databaseinfoService.getByDbname(fileName);
+                    databaseinfoService.delete(databaseInfo);
+                    //  smg = e.getMessage()+ "Mysql database already exist";
+                    System.out.println("Error " + fileName +" "+e.getMessage());
+                }
+                // return smg;
+            }
+        }).start();
+
+        return new ModelAndView("redirect:/databasemanager/masterdatabases");
+        // return "Done";
+    }
+
 
 
 }
